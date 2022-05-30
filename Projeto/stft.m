@@ -1,4 +1,6 @@
-% Params:
+%% Exercicio 4.2
+
+% Parametros:
 % x - signal in the time domain
 % win - analysis window function
 % hop - hop size
@@ -6,25 +8,21 @@
 % fs - sampling frequency, Hz
 
 % Returns:
-% STFT - STFT-matrix (only unique points, time 
-%        across columns, frequency across rows)
+% STFT - STFT-matrix (only unique points, time across columns, frequency across rows)
 % f - frequency vector, Hz
 % t - time vector, s
 
 function [STFT, f, t] = stft(x, win, hop, nfft, fs)
-% representation of the signal as column-vector
+% parse signal as a column vector
 x = x(:);
-
-% determination of the signal length 
-xlen = length(x);
 
 % determination of the window length
 wlen = length(win);
 
 % stft matrix size estimation and preallocation
-NUP = ceil((1+nfft)/2);     % calculate the number of unique fft points
-L = 1+fix((xlen-wlen)/hop); % calculate the number of signal frames
-STFT = zeros(NUP, L);       % preallocate the stft matrix
+NUP = ceil((1+nfft)/2);             % calculate the number of unique fft points
+L = 1+fix((length(x)-wlen)/hop);    % calculate the number of signal frames
+STFT = zeros(NUP, L);               % preallocate the stft matrix
 
 % STFT (via time-localized FFT)
 for l = 0:L-1

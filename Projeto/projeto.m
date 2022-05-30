@@ -1,11 +1,10 @@
 clear all
 clc
+
 close all
-
-
 %% Exercicio 1 
 %variaveis
-Fs = 50; % Frequência de amostragem dada no enunciado - passos por minuto
+Fs = 50; % Frequencia de amostragem dada no enunciado - passos por minuto
 exp= {"34","35","36","37","38","39","40","41"}; % Array para os exp para os ficheiros
 User = {"17","18","19","20"}; % Array para os users para os ficheiros
 
@@ -14,7 +13,6 @@ sensores = {"ACC_X","ACC_Y","ACC_Z"}; % Array para a s legendas dos graficos
 
 % imports:
 labels_info = importdata("HAPT Data Set/RawData/labels.txt");
-
 
 w_x = {{},{},{},{},{},{},{},{},{},{}};
 w_y = {{},{},{},{},{},{},{},{},{},{}};
@@ -68,7 +66,6 @@ lay2stand_z = {{},{},{},{},{},{},{},{},{},{}};
 par = 1; % variaveis para ajudar a selecionar a file correta.
 users = 0;
 
-% main loop
 for k=1:numel(exp) 
     if (par==1) % cada user tem duas exp
         users = users + 1; % se ja tiver passado uma vez, aumenta o user.
@@ -276,18 +273,18 @@ for k=1:numel(exp)
     end
 end
 
-
+%%% Exercicio 3.1 e 3.2
 %Arrays steps/sec
 steps_w = [];
 steps_wup = [];
 steps_wdown = [];
 
 %Total steps (CADA PARCELA E UM FICHEIRO)
-total_steps_w = zeros(10,1);
-total_steps_wup = zeros(10,1);
-total_steps_wdown = zeros(10,1);
+total_steps_w = zeros(numel(exp),1);
+total_steps_wup = zeros(numel(exp),1);
+total_steps_wdown = zeros(numel(exp),1);
 
-for k=1:numel(exp)
+for n=1:numel(exp)
     %WALKING
     for i=1:1:size(w_z{n},2)
         black_win = blackman(numel(w_z{n}{i}));
@@ -335,29 +332,171 @@ for k=1:numel(exp)
 end
 
 %media steps por minuto
+%%% 3.3
 media_steps_w_sec = mean(steps_w)
 media_steps_wup_sec = mean(steps_wup)
 media_steps_wdown_sec = mean(steps_wdown)
 
+dp_steps_w_sec = std(steps_w)
+dp_steps_wup_sec = std(steps_wup)
+dp_steps_wdown_sec = std(steps_wdown)
 
 
+figure();
+hold on
+
+%%% 3.4
+for n=1:1:numel(exp)
+    for i=1:1:size(w_x{n},2)
+        black_win = blackman(numel(w_x{n}{i}));
+        m = abs(fftshift(fft(detrend(w_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(w_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(w_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(w_up_x{n},2)
+        black_win = blackman(numel(w_up_x{n}{i}));
+        m = abs(fftshift(fft(detrend(w_up_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(w_up_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(w_up_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(w_down_x{n},2)
+        black_win = blackman(numel(w_down_x{n}{i}));
+        m = abs(fftshift(fft(detrend(w_down_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(w_down_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(w_down_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(sit_x{n},2)
+        black_win = blackman(numel(sit_x{n}{i}));
+        m = abs(fftshift(fft(detrend(sit_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(sit_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(sit_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(stand_x{n},2)
+        black_win = blackman(numel(stand_x{n}{i}));
+        m = abs(fftshift(fft(detrend(stand_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(stand_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(stand_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(lay_x{n},2)
+        black_win = blackman(numel(lay_x{n}{i}));
+        m = abs(fftshift(fft(detrend(lay_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(lay_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(lay_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(stand2sit_x{n},2)
+        black_win = blackman(numel(stand2sit_x{n}{i}));
+        m = abs(fftshift(fft(detrend(stand2sit_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(stand2sit_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(stand2sit_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(sit2stand_x{n},2)
+        black_win = blackman(numel(sit2stand_x{n}{i}));
+        m = abs(fftshift(fft(detrend(sit2stand_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(sit2stand_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(sit2stand_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(sit2lay_x{n},2)
+        black_win = blackman(numel(sit2lay_x{n}{i}));
+        m = abs(fftshift(fft(detrend(sit2lay_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(sit2lay_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(sit2lay_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(lay2sit_x{n},2)
+        black_win = blackman(numel(lay2sit_x{n}{i}));
+        m = abs(fftshift(fft(detrend(lay2sit_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(lay2sit_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(lay2sit_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(stand2lay_x{n},2)
+        black_win = blackman(numel(stand2lay_x{n}{i}));
+        m = abs(fftshift(fft(detrend(stand2lay_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(stand2lay_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(stand2lay_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+    
+    for i=1:1:size(lay2stand_x{n},2)
+        black_win = blackman(numel(lay2stand_x{n}{i}));
+        m = abs(fftshift(fft(detrend(lay2stand_x{n}{i}).*black_win)));
+        [m_x, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(lay2stand_y{n}{i}).*black_win)));
+        [m_y, ~] = findpeaks(m);
+        m = abs(fftshift(fft(detrend(lay2stand_z{n}{i}).*black_win)));
+        [m_z, ~] = findpeaks(m);
+        scatter3(m_x(1), m_y(1), m_z(1), 'o');
+    end
+end
+view(40,35)
+grid on
+hold off
+%%% 3.5
 
 
+%% Exercicio 4
+%{
+    Obter computacionalmente as distribui?ões tempo-frequ?ncia para o sinal do acelerómetro no 
+    “eixo Z” para um ficheiro de dados ? sua escolha. Usar a Short-Time Fourier Transform (STFT). 
+    4.1. Escolher, justificadamente, a janela a considerar na aplica??o da STFT. Para isso, selecionar 
+    uma atividade din?mica e usar diferentes tipos de janela para segmentar o sinal associado a 
+    essa atividade. Calcular a DFT do segmento com as diferentes janelas e comparar os 
+    resultados obtidos, procurando evidenciar o efeito das diferentes janelas
+%}
+
+% ficheiro 1, eixo Z
+accel_z = data(labels_info(ix_labels(1),4):labels_info(ix_labels(1),5),3)
+%[STFT_func, t ,f] = stft(accel_z, ); 
 
 
-%Calcular DFT
-% for i = 1:3
-%   % for j=ix_labels(1):ix_labels(numel(ix_labels)) % fazer por cada eixo os
-%   % usados não.
-%         x= squeeze(data(labels_info(ix_labels,4):labels_info(ix_labels,5),i));
-%         
-%         y=fftshift((fft(x))); %DFT
-%         % w = hamming(length(x));
-%         % y= fftshift(fft(x.*w));
-%         r =1:(labels_info(ix_labels,5)-(labels_info(ix_labels,4))+1);
-%         % suponho que isto seja os dfts do rodrigo ?
-%         figure
-%         plot(r,y,"-")
-%         axis tight
-%    % end
-% end
