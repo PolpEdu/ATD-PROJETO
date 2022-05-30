@@ -8,9 +8,9 @@
 % fs    - sampling frequency, Hz
 
 % Returns:
-% STFT - STFT-matrix (only unique points, time across columns, frequency across rows)
-% f - frequency vector, Hz
-% t - time vector, s
+% STFT  - STFT-matrix (only unique points, time across columns, frequency across rows)
+% f     - frequency vector, Hz
+% t     - time vector, s
 
 function [STFT, f, t] = stft(x, win, hop, nfft, fs)
 % parse signal as a column vector

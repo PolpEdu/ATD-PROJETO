@@ -3,13 +3,16 @@ close all
 clc
 
 %% Exercicio 1 
-%variaveis
+% Inicializar variaveis
+
 Fs = 50; % Frequencia de amostragem dada no enunciado - passos por minuto
 exp= {"34","35","36","37","38","39","40","41"}; % Array para os exp para os ficheiros
 User = {"17","18","19","20"}; % Array para os users para os ficheiros
 
-atividades = {"W","WU","WD","S","ST","L","STSit","SitTS","SitTL","LTSit","STL","LTS"};  % Array com todas as atitividades para conseguirmos dar label
-sensores = {"ACC_X","ACC_Y","ACC_Z"}; % Array para a s legendas dos graficos
+% Array com todas as atitividades para conseguirmos dar label
+atividades = {"W","WU","WD","S","ST","L","STSit","SitTS","SitTL","LTSit","STL","LTS"};  
+% Array para as legendas dos graficos
+sensores = {"ACC_X","ACC_Y","ACC_Z"}; 
 
 % imports:
 labels_info = importdata("HAPT Data Set/RawData/labels.txt");
@@ -77,7 +80,6 @@ for k=1:numel(exp)
         par = 1;
     end
 
-    
     % carregar ficheiro correspondente aos valores obtidos
     ficheiro = sprintf("HAPT Data Set/RawData/acc_exp%s_user%s.txt",exp{k},User{users})
     data_read = importdata(ficheiro);
@@ -85,7 +87,7 @@ for k=1:numel(exp)
     [n_pontos,n_plots] = size(data); % tamanho da data
 
     % labels para o ficheiro correspondente
-    info_labels = intersect(find(labels_info(:,1)==str2num(exp{k})),find(labels_info(:,2)==str2num(User{users})));
+    info_labels = intersect(find(labels_info(:,1)== str2num(exp{k})),find(labels_info(:,2)== str2num(User{users})));
     
     % Criar vetor da data de acordo com a frequencia de amostragem obtida
     t=[0:size(data,1)-1]./Fs;
@@ -106,13 +108,14 @@ for k=1:numel(exp)
              else
                  ypos = max(data(:,i))-(0.2*max(data(:,i)));
              end
-             % aqui escreve efetivamente as labels
+             % escrever as labels
             text(t(labels_info(info_labels(j),4))/60,ypos,atividades{labels_info(info_labels(j),3)},"VerticalAlignment","top","HorizontalAlignment","left");
         end
     end
 
 
 %% Exercicio 3
+% guardar para variaveis os diferentes estados
     for i=1:size(info_labels,1)
         switch labels_info((info_labels(i,1)),3)
             case 1
@@ -296,6 +299,7 @@ Esp = VN*100
 VN +FP
 %}
 
+% foi usada a janela "blackman"
 for n=1:numel(exp)
     %WALKING
     for i=1:1:size(w_z{n},2)
@@ -346,12 +350,13 @@ for n=1:numel(exp)
     end
 end
 
-%media steps por minuto
 %%% 3.3
+%  Media steps por minuto
 media_steps_w_sec = mean(steps_w)
 media_steps_wup_sec = mean(steps_wup)
 media_steps_wdown_sec = mean(steps_wdown)
 
+% Desvio 
 dp_steps_w_sec = std(steps_w)
 dp_steps_wup_sec = std(steps_wup)
 dp_steps_wdown_sec = std(steps_wdown)
@@ -437,7 +442,7 @@ for n=1:1:numel(exp)
         [m_y, ~] = findpeaks(m);
         m = abs(fftshift(fft(detrend(stand2sit_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        scatter3(m_x(1), m_y(1), m_z(1), 'o');
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
     end
     
     for i=1:1:size(sit2stand_x{n},2)
@@ -500,4 +505,3 @@ grid on
 hold off
 
 %% Exercicio 4 - No ficheiro "Exercicio4.m"
-
