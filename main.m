@@ -73,7 +73,7 @@ for n=1:1:10
     dacc = import_raw_data(acc_file);
 
     %Get label info
-    all_labels = import_label('labels.txt');
+    all_labels = import_labels('labels.txt');
 
     %Get labels for the current data file
     ix_labels = intersect(find(all_labels(:, 1) == str2num(Expr{e})), find(all_labels(:, 2) == str2num(User{u})));
@@ -86,7 +86,7 @@ for n=1:1:10
     %Get data size
     [n_points, n_plots] = size(data);
     
-    %{
+    
     %Plot colored---------------------------------------------------------%
     figure;
     for i=1:n_plots
@@ -105,7 +105,7 @@ for n=1:1:10
             text(t(all_labels(ix_labels(j), 4))/60, ypos, activities{all_labels(ix_labels(j), 3)});
         end
     end
-    %}
+    
     
     %DFT------------------------------------------------------------------%
     
@@ -272,7 +272,7 @@ for n=1:1:10
     end
 end
 
-%{
+
 %Passos-------------------------------------------------------------------%
 %(+features atividades dinamicas)
 
@@ -337,197 +337,147 @@ end
 media_steps_w_sec = mean(steps_w);
 media_steps_wup_sec = mean(steps_wup);
 media_steps_wdown_sec = mean(steps_wdown);
-%}
+
 
 close all
 
 %Features-----------------------------------------------------------------%
-%(magnitude e potencia)
+
 figure();
 hold on
 
-%%{
 for n=1:1:10
     for i=1:1:size(w_x{n},2)
         black_win = blackman(numel(w_x{n}{i}));
         m = abs(fftshift(fft(detrend(w_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(w_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(w_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(w_up_x{n},2)
         black_win = blackman(numel(w_up_x{n}{i}));
         m = abs(fftshift(fft(detrend(w_up_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(w_up_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(w_up_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(w_down_x{n},2)
         black_win = blackman(numel(w_down_x{n}{i}));
         m = abs(fftshift(fft(detrend(w_down_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(w_down_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(w_down_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(sit_x{n},2)
         black_win = blackman(numel(sit_x{n}{i}));
         m = abs(fftshift(fft(detrend(sit_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(sit_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(sit_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(stand_x{n},2)
         black_win = blackman(numel(stand_x{n}{i}));
         m = abs(fftshift(fft(detrend(stand_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(stand_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(stand_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(lay_x{n},2)
         black_win = blackman(numel(lay_x{n}{i}));
         m = abs(fftshift(fft(detrend(lay_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(lay_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(lay_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(stand2sit_x{n},2)
         black_win = blackman(numel(stand2sit_x{n}{i}));
         m = abs(fftshift(fft(detrend(stand2sit_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(stand2sit_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(stand2sit_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(sit2stand_x{n},2)
         black_win = blackman(numel(sit2stand_x{n}{i}));
         m = abs(fftshift(fft(detrend(sit2stand_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(sit2stand_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(sit2stand_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(sit2lay_x{n},2)
         black_win = blackman(numel(sit2lay_x{n}{i}));
         m = abs(fftshift(fft(detrend(sit2lay_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(sit2lay_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(sit2lay_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(lay2sit_x{n},2)
         black_win = blackman(numel(lay2sit_x{n}{i}));
         m = abs(fftshift(fft(detrend(lay2sit_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(lay2sit_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(lay2sit_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(stand2lay_x{n},2)
         black_win = blackman(numel(stand2lay_x{n}{i}));
         m = abs(fftshift(fft(detrend(stand2lay_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(stand2lay_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(stand2lay_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
     
     for i=1:1:size(lay2stand_x{n},2)
         black_win = blackman(numel(lay2stand_x{n}{i}));
         m = abs(fftshift(fft(detrend(lay2stand_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
-        p_x = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(lay2stand_y{n}{i}).*black_win)));
         [m_y, ~] = findpeaks(m);
-        p_y = sum(m.^2) / (2*length(m));
         m = abs(fftshift(fft(detrend(lay2stand_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        p_z = sum(m.^2) / (2*length(m));
         %scatter3(m_x(1), m_y(1), m_z(1), 'o');
-        %scatter3(p_x, p_y, p_z, 'o');
     end
 end
-%%}
 
 hold off
