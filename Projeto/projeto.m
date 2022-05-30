@@ -1,7 +1,7 @@
 clear all
+close all
 clc
 
-close all
 %% Exercicio 1 
 %variaveis
 Fs = 50; % Frequencia de amostragem dada no enunciado - passos por minuto
@@ -14,53 +14,55 @@ sensores = {"ACC_X","ACC_Y","ACC_Z"}; % Array para a s legendas dos graficos
 % imports:
 labels_info = importdata("HAPT Data Set/RawData/labels.txt");
 
-w_x = {{},{},{},{},{},{},{},{},{},{}};
-w_y = {{},{},{},{},{},{},{},{},{},{}};
-w_z = {{},{},{},{},{},{},{},{},{},{}};
+w_x = {{},{},{},{},{},{},{},{}};
+w_y = {{},{},{},{},{},{},{},{}};
+w_z = {{},{},{},{},{},{},{},{}};
  
-w_up_x = {{},{},{},{},{},{},{},{},{},{}};
-w_up_y = {{},{},{},{},{},{},{},{},{},{}};
-w_up_z = {{},{},{},{},{},{},{},{},{},{}};
+w_up_x = {{},{},{},{},{},{},{},{}};
+w_up_y = {{},{},{},{},{},{},{},{}};
+w_up_z = {{},{},{},{},{},{},{},{}};
  
-w_down_x = {{},{},{},{},{},{},{},{},{},{}};
-w_down_y = {{},{},{},{},{},{},{},{},{},{}};
-w_down_z = {{},{},{},{},{},{},{},{},{},{}};
+w_down_x = {{},{},{},{},{},{},{},{}};
+w_down_y = {{},{},{},{},{},{},{},{}};
+w_down_z = {{},{},{},{},{},{},{},{}};
  
-sit_x = {{},{},{},{},{},{},{},{},{},{}};
-sit_y = {{},{},{},{},{},{},{},{},{},{}};
-sit_z = {{},{},{},{},{},{},{},{},{},{}};
+sit_x = {{},{},{},{},{},{},{},{}};
+sit_y = {{},{},{},{},{},{},{},{}};
+sit_z = {{},{},{},{},{},{},{},{}};
  
-stand_x = {{},{},{},{},{},{},{},{},{},{}};
-stand_y = {{},{},{},{},{},{},{},{},{},{}};
-stand_z = {{},{},{},{},{},{},{},{},{},{}};
+stand_x = {{},{},{},{},{},{},{},{}};
+stand_y = {{},{},{},{},{},{},{},{}};
+stand_z = {{},{},{},{},{},{},{},{}};
  
-lay_x = {{},{},{},{},{},{},{},{},{},{}};
-lay_y = {{},{},{},{},{},{},{},{},{},{}};
-lay_z = {{},{},{},{},{},{},{},{},{},{}};
+lay_x = {{},{},{},{},{},{},{},{}};
+lay_y = {{},{},{},{},{},{},{},{}};
+lay_z = {{},{},{},{},{},{},{},{}};
  
-stand2sit_x = {{},{},{},{},{},{},{},{},{},{}};
-stand2sit_y = {{},{},{},{},{},{},{},{},{},{}};
-stand2sit_z = {{},{},{},{},{},{},{},{},{},{}};
+stand2sit_x = {{},{},{},{},{},{},{},{}};
+stand2sit_y = {{},{},{},{},{},{},{},{}};
+stand2sit_z = {{},{},{},{},{},{},{},{}};
  
-sit2stand_x = {{},{},{},{},{},{},{},{},{},{}};
-sit2stand_y = {{},{},{},{},{},{},{},{},{},{}};
-sit2stand_z = {{},{},{},{},{},{},{},{},{},{}};
+sit2stand_x = {{},{},{},{},{},{},{},{}};
+sit2stand_y = {{},{},{},{},{},{},{},{}};
+sit2stand_z = {{},{},{},{},{},{},{},{}};
  
-sit2lay_x = {{},{},{},{},{},{},{},{},{},{}};
-sit2lay_y = {{},{},{},{},{},{},{},{},{},{}};
-sit2lay_z = {{},{},{},{},{},{},{},{},{},{}};
+sit2lay_x = {{},{},{},{},{},{},{},{}};
+sit2lay_y = {{},{},{},{},{},{},{},{}};
+sit2lay_z = {{},{},{},{},{},{},{},{}};
  
-lay2sit_x = {{},{},{},{},{},{},{},{},{},{}};
-lay2sit_y = {{},{},{},{},{},{},{},{},{},{}};
-lay2sit_z = {{},{},{},{},{},{},{},{},{},{}};
+lay2sit_x = {{},{},{},{},{},{},{},{}};
+lay2sit_y = {{},{},{},{},{},{},{},{}};
+lay2sit_z = {{},{},{},{},{},{},{},{}};
  
-stand2lay_x = {{},{},{},{},{},{},{},{},{},{}};
-stand2lay_y = {{},{},{},{},{},{},{},{},{},{}};
-stand2lay_z = {{},{},{},{},{},{},{},{},{},{}};
+stand2lay_x = {{},{},{},{},{},{},{},{}};
+stand2lay_y = {{},{},{},{},{},{},{},{}};
+stand2lay_z = {{},{},{},{},{},{},{},{}};
  
-lay2stand_x = {{},{},{},{},{},{},{},{},{},{}};
-lay2stand_y = {{},{},{},{},{},{},{},{},{},{}};
-lay2stand_z = {{},{},{},{},{},{},{},{},{},{}};
+lay2stand_x = {{},{},{},{},{},{},{},{}};
+lay2stand_y = {{},{},{},{},{},{},{},{}};
+lay2stand_z = {{},{},{},{},{},{},{},{}};
+
+
 
 %% Exercicio 2
 par = 1; % variaveis para ajudar a selecionar a file correta.
@@ -485,18 +487,5 @@ hold off
 %%% 3.5
 
 
-%% Exercicio 4
-%{
-    Obter computacionalmente as distribui?ões tempo-frequ?ncia para o sinal do acelerómetro no 
-    “eixo Z” para um ficheiro de dados ? sua escolha. Usar a Short-Time Fourier Transform (STFT). 
-    4.1. Escolher, justificadamente, a janela a considerar na aplica??o da STFT. Para isso, selecionar 
-    uma atividade din?mica e usar diferentes tipos de janela para segmentar o sinal associado a 
-    essa atividade. Calcular a DFT do segmento com as diferentes janelas e comparar os 
-    resultados obtidos, procurando evidenciar o efeito das diferentes janelas
-%}
-
-% ficheiro 1, eixo Z
-accel_z = data(labels_info(ix_labels(1),4):labels_info(ix_labels(1),5),3)
-%[STFT_func, t ,f] = stft(accel_z, ); 
-
+%% Exercicio 4 - No ficheiro "Exercicio4.m"
 

@@ -1,11 +1,11 @@
 %% Exercicio 4.2
 
 % Parametros:
-% x - signal in the time domain
-% win - analysis window function
-% hop - hop size
-% nfft - number of FFT points
-% fs - sampling frequency, Hz
+% x     - signal in the time domain
+% win   - analysis window function
+% hop   - hop size
+% nfft  - number of FFT points
+% fs    - sampling frequency, Hz
 
 % Returns:
 % STFT - STFT-matrix (only unique points, time across columns, frequency across rows)
