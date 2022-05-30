@@ -24,7 +24,6 @@ end
 % Converter Amplitude do espetro para dB
 STFT = 20*log10(STFT + 1e-6);
 
-
 figure
 imagesc(t,f,STFT,clims) % apresentar a imagem
 colorbar

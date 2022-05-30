@@ -278,7 +278,7 @@ for k=1:numel(exp)
     end
 end
 
-%%% Exercicio 3.1 e 3.2
+%% Exercicio 3
 % Arrays com os passos por segundo
 steps_w = [];
 steps_wup = [];
@@ -291,7 +291,7 @@ total_steps_wdown = zeros(numel(exp),1);
 
 %{
 Sensibilidade:
-SE = VP *100 Verdadeiros positivos sobre verdadeiros positivos + falsos negativos
+SE = VP * 100 Verdadeiros positivos sobre verdadeiros positivos + falsos negativos
 VP + FN
 -----
 Especificidade:
@@ -300,7 +300,7 @@ VN +FP
 %}
 
 % foi usada a janela "blackman"
-for n=1:numel(exp)
+for n=1:numel(exp) % Para as atividades dinamicas:
     %WALKING
     for i=1:1:size(w_z{n},2)
         black_win = blackman(numel(w_z{n}{i}));
@@ -309,7 +309,6 @@ for n=1:numel(exp)
         
         f = (0:length(dft)-1)*100/length(dft);
         
-        %% 3.4 Amplitudes do dft calculado para WALKING
         [pks_m, pks_f] = findpeaks(m);
         Ts=1/pks_f(1);
         
@@ -324,7 +323,6 @@ for n=1:numel(exp)
         m = abs(dft);
         f = (0:length(dft)-1)*100/length(dft);
         
-        %% 3.4 Amplitudes do dft calculado para WALKING UPSTAIRS
         [pks_m, pks_f] = findpeaks(m);
         
         Ts=1/pks_f(1);
@@ -340,7 +338,6 @@ for n=1:numel(exp)
         m = abs(dft);
         f = (0:length(dft)-1)*100/length(dft);
         
-        %% 3.4 Amplitudes do dft calculado para WALKING DOWNSTAIRS
         [pks_m, pks_f] = findpeaks(m);
         
         Ts=1/pks_f(1);
@@ -350,7 +347,6 @@ for n=1:numel(exp)
     end
 end
 
-%%% 3.3
 %  Media steps por minuto
 media_steps_w_sec = mean(steps_w)
 media_steps_wup_sec = mean(steps_wup)
