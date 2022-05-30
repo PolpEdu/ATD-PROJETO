@@ -66,7 +66,7 @@ for k=1:numel(Expr)
     [n_pontos,n_plots] = size(data);
     
     %Desenha 10 figuras independentes
-    figure;
+    % figure;
     
     for i=1:n_plots % Desenha o grafico em si, 3 por figura
         subplot(n_plots,1,i);

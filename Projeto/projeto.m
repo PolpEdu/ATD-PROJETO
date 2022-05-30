@@ -10,8 +10,8 @@ clc
 %% Exercicio 1 
 %Inicalizacao de variaveis
 
-Expr={"21","22","23","24","25","26","27","28","29","30"}; % Array para os expr para os ficheiros
-User = {"10","11","12","13","14","15"}; % Array para os users para os ficheiros
+Expr={"34","35","36","35","36","37","40","41"}; % Array para os expr para os ficheiros
+User = {"17","18","19","20","21"}; % Array para os users para os ficheiros
 Fs = 50; % Frequência de amostragem dada no enunciado - Passos por minuto.
 Sensors = {"ACC_X","ACC_Y","ACC_Z"}; % Array para a s legendas dos graficos
 activities = {"W","WU","WD","S","ST","L","STSit","SitTS","SitTL","LTSit","STL","LTS"};  % Array com todas as atitividades para conseguirmos dar label
@@ -44,7 +44,7 @@ for k=1:numel(Expr)
        	if (numel(Expr))
             % se for o ultimo elemento do array dos exp damos-lhe o ultimo
             % elemento do array dos users
-            users = 7;
+            users = 5;
         end
     end
     
