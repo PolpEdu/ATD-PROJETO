@@ -5,7 +5,7 @@ close all
 
 %% Exercicio 1 
 %variaveis
-Fs = 50; % Frequência de amostragem dada no enunciado - passos por minuto
+Fs = 50; % FrequÃªncia de amostragem dada no enunciado - passos por minuto
 exp={"34","35","36","37","38","39","40","41"}; % Array para os exp para os ficheiros
 User = {"17","18","19","20"}; % Array para os users para os ficheiros
 
@@ -33,26 +33,28 @@ for i=1:numel(exp)
     % carregar ficheiro correspondente aos valores obtidos
     ficheiro = sprintf("HAPT Data Set/RawData/acc_exp%s_user%s.txt",exp{i},User{users})
     data_read = importdata(ficheiro);
-    data = data_read;
-    [n_pontos,n_plots] = size(data); % tamanho da data
-
+    
     % labels para o ficheiro correspondente
     ix_labels = intersect(find(labels_info(:,1)==str2num(exp{i})),find(labels_info(:,2)==str2num(User{users})));
-    
+    %damos Ã  data o valor do ficheiro
+    data = data_read;
     % Criar vetor da data de acordo com a frequencia de amostragem obtida
     t=[0:size(data,1)-1]./Fs;
+
+    %Get data size
+    [n_pontos,n_plots] = size(data);
     
-    % Desenha 8 figuras independentes
+    %Desenha 10 figuras independentes
     figure;
     
-    for i=1:n_plots % Desenha o grafico em si, 3 por figura
+ for i=1:n_plots % Desenha o grafico em si, 3 por figura
          subplot(n_plots,1,i);plot(t./60,data(:,i),"k--")
 
          axis([0 t(end)./60 min(data(:,i)) max(data(:,i))])
          xlabel("Tempo (mins)","fontsize",16,"fontweight","bold")
          ylabel(sensores{i},"fontsize",16,"fontweight","bold");
-         hold on % salva o plot atual
-         for j=1:numel(ix_labels)
+         hold on
+         for j=1:numel(ix_labels) % aqui vai dar as labels ao grafico
              plot(t(labels_info(ix_labels(j),4):labels_info(ix_labels(j),5))./60,data(labels_info(ix_labels(j),4):labels_info(ix_labels(j),5),i))
              if (mod(j,2)) == 1 % vai ver se deve ser em cima ou em baixo
                  ypos = min(data(:,i))-(0.2*min(data(:,i)));
@@ -62,7 +64,8 @@ for i=1:numel(exp)
              % aqui escreve efetivamente as labels
             text(t(labels_info(ix_labels(j),4))/60,ypos,atividades{labels_info(ix_labels(j),3)},"VerticalAlignment","top","HorizontalAlignment","left");
         end
-    end
+     end
+     
 end
 %% Exercicio 4
 
@@ -71,7 +74,7 @@ end
 
 for i = 1:3
   % for j=ix_labels(1):ix_labels(numel(ix_labels)) % fazer por cada eixo os
-  % usados não.
+  % usados nÃ£o.
         x= squeeze(data(labels_info(ix_labels,4):labels_info(ix_labels,5),i));
         % w = hamming(length(x));
         y=fftshift((fft(x))); %DFT
