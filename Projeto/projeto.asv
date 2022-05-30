@@ -85,7 +85,7 @@ for k=1:numel(exp)
     [n_pontos,n_plots] = size(data); % tamanho da data
 
     % labels para o ficheiro correspondente
-    info_labels = intersect(find(labels_info(:,1)==str2num(exp{k})),find(labels_info(:,2)==str2num(User{users})));
+    ix_labels = intersect(find(labels_info(:,1)==str2num(exp{k})),find(labels_info(:,2)==str2num(User{users})));
     
     % Criar vetor da data de acordo com a frequencia de amostragem obtida
     t=[0:size(data,1)-1]./Fs;
@@ -99,176 +99,176 @@ for k=1:numel(exp)
          xlabel("Time(mins)","fontsize",16,"fontweight","bold")
          ylabel(sensores{i},"fontsize",16,"fontweight","bold");
          hold on % salva o plot atual
-         for j=1:numel(info_labels)
-             plot(t(labels_info(info_labels(j),4):labels_info(info_labels(j),5))./60,data(labels_info(info_labels(j),4):labels_info(info_labels(j),5),i))
+         for j=1:numel(ix_labels)
+             plot(t(labels_info(ix_labels(j),4):labels_info(ix_labels(j),5))./60,data(labels_info(ix_labels(j),4):labels_info(ix_labels(j),5),i))
              if (mod(j,2)) == 1 % vai ver se deve ser em cima ou em baixo
                  ypos = min(data(:,i))-(0.2*min(data(:,i)));
              else
                  ypos = max(data(:,i))-(0.2*max(data(:,i)));
              end
              % aqui escreve efetivamente as labels
-            text(t(labels_info(info_labels(j),4))/60,ypos,atividades{labels_info(info_labels(j),3)},"VerticalAlignment","top","HorizontalAlignment","left");
+            text(t(labels_info(ix_labels(j),4))/60,ypos,atividades{labels_info(ix_labels(j),3)},"VerticalAlignment","top","HorizontalAlignment","left");
         end
     end
 
 
 %% Exercicio 3
-    for i=1:size(info_labels,1)
-        switch labels_info((info_labels(i,1)),3)
+    for i=1:size(ix_labels,1)
+        switch labels_info((ix_labels(i,1)),3)
             case 1
                 temp = w_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 w_x{k} = temp;
  
                 temp = w_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 w_y{k} = temp;
  
                 temp = w_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 w_z{k} = temp;
  
             case 2
                 temp = w_up_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 w_up_x{k} = temp;
  
                 temp = w_up_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 w_up_y{k} = temp;
  
                 temp = w_up_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 w_up_z{k} = temp;
  
             case 3
                 temp = w_down_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 w_down_x{k} = temp;
  
                 temp = w_down_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 w_down_y{k} = temp;
  
                 temp = w_down_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 w_down_z{k} = temp;
  
             case 4
                 temp = sit_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 sit_x{k} = temp;
  
                 temp = sit_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 sit_y{k} = temp;
  
                 temp = sit_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 sit_z{k} = temp;
  
             case 5
                 temp = stand_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 stand_x{k} = temp;
  
                 temp = stand_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 stand_y{k} = temp;
  
                 temp = stand_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 stand_z{k} = temp;
  
             case 6
                 temp = lay_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 lay_x{k} = temp;
  
                 temp = lay_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 lay_y{k} = temp;
  
                 temp = lay_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 lay_z{k} = temp;
  
             case 7
                 temp = stand2sit_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 stand2sit_x{k} = temp;
  
                 temp = stand2sit_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 stand2sit_y{k} = temp;
  
                 temp = stand2sit_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 stand2sit_z{k} = temp;
  
             case 8
                 temp = sit2stand_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 sit2stand_x{k} = temp;
  
                 temp = sit2stand_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 sit2stand_y{k} = temp;
  
                 temp = sit2stand_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 sit2stand_z{k} = temp;
  
             case 9
                 temp = sit2lay_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 sit2lay_x{k} = temp;
  
                 temp = sit2lay_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 sit2lay_y{k} = temp;
  
                 temp = sit2lay_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 sit2lay_z{k} = temp;
  
             case 10
                 temp = lay2sit_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 lay2sit_x{k} = temp;
  
                 temp = lay2sit_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 lay2sit_y{k} = temp;
  
                 temp = lay2sit_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 lay2sit_z{k} = temp;
  
             case 11
                 temp = stand2lay_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 stand2lay_x{k} = temp;
  
                 temp = stand2lay_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 stand2lay_y{k} = temp;
  
                 temp = stand2lay_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 stand2lay_z{k} = temp;
  
             case 12  
                 temp = lay2stand_x{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),1);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),1);
                 lay2stand_x{k} = temp;
  
                 temp = lay2stand_y{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),2);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),2);
                 lay2stand_y{k} = temp;
  
                 temp = lay2stand_z{k};
-                temp{size(temp,2)+1} = data(labels_info(info_labels(i,1),4):labels_info(info_labels(i,1),5),3);
+                temp{size(temp,2)+1} = data(labels_info(ix_labels(i,1),4):labels_info(ix_labels(i,1),5),3);
                 lay2stand_z{k} = temp;
             otherwise
         end
@@ -276,25 +276,15 @@ for k=1:numel(exp)
 end
 
 %%% Exercicio 3.1 e 3.2
-% Arrays com os passos por segundo
+%Arrays steps/sec
 steps_w = [];
 steps_wup = [];
 steps_wdown = [];
 
-%Passos Totais (Uma parcela é um ficheiro)
+%Total steps (CADA PARCELA E UM FICHEIRO)
 total_steps_w = zeros(numel(exp),1);
 total_steps_wup = zeros(numel(exp),1);
 total_steps_wdown = zeros(numel(exp),1);
-
-%{
-Sensibilidade:
-SE = VP *100 Verdadeiros positivos sobre verdadeiros positivos + falsos negativos
-VP + FN
------
-Especificidade:
-Esp = VN*100
-VN +FP
-%}
 
 for n=1:numel(exp)
     %WALKING
@@ -305,7 +295,7 @@ for n=1:numel(exp)
         
         f = (0:length(dft)-1)*100/length(dft);
         
-        %% 3.4 Amplitudes do dft calculado para WALKING
+        %% 3.4 Amplitude
         [pks_m, pks_f] = findpeaks(m);
         Ts=1/pks_f(1);
         
@@ -320,7 +310,7 @@ for n=1:numel(exp)
         m = abs(dft);
         f = (0:length(dft)-1)*100/length(dft);
         
-        %% 3.4 Amplitudes do dft calculado para WALKING UPSTAIRS
+        %% 3.4 Amplitude
         [pks_m, pks_f] = findpeaks(m);
         
         Ts=1/pks_f(1);
@@ -359,10 +349,9 @@ dp_steps_wdown_sec = std(steps_wdown)
 figure();
 hold on
 
-%%% 3.5 - Retirar comentários para visualizar a data no scatter!
+%%% 3.5
 for n=1:1:numel(exp)
     for i=1:1:size(w_x{n},2)
-        % obter a janela através do blackman
         black_win = blackman(numel(w_x{n}{i}));
         m = abs(fftshift(fft(detrend(w_x{n}{i}).*black_win)));
         [m_x, ~] = findpeaks(m);
@@ -370,8 +359,7 @@ for n=1:1:numel(exp)
         [m_y, ~] = findpeaks(m);
         m = abs(fftshift(fft(detrend(w_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        % apresentar a data obtida através das 3 dimensoes.
-        scatter3(m_x(1), m_y(1), m_z(1), 'o');
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
     end
     
     for i=1:1:size(w_up_x{n},2)
@@ -437,7 +425,7 @@ for n=1:1:numel(exp)
         [m_y, ~] = findpeaks(m);
         m = abs(fftshift(fft(detrend(stand2sit_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        scatter3(m_x(1), m_y(1), m_z(1), 'o');
+        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
     end
     
     for i=1:1:size(sit2stand_x{n},2)
@@ -492,10 +480,10 @@ for n=1:1:numel(exp)
         [m_y, ~] = findpeaks(m);
         m = abs(fftshift(fft(detrend(lay2stand_z{n}{i}).*black_win)));
         [m_z, ~] = findpeaks(m);
-        % scatter3(m_x(1), m_y(1), m_z(1), 'o');
+        scatter3(m_x(1), m_y(1), m_z(1), 'o');
     end
 end
-view(40,35) % mudar a vista para apresentar o grafico 3d. 
+view(40,35)
 grid on
 hold off
 

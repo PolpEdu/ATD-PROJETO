@@ -1,10 +1,11 @@
-fich = "HAPT Data Set/RawData/acc_exp21_user10.txt"; % - Ficheiro escolhido a acaso - %
-data = importdata(fich);
+ficheiro = "HAPT Data Set/RawData/acc_exp21_user10.txt"; % - Ficheiro escolhido a acaso - %
+data = importdata(ficheiro);
 dft = abs(fftshift(fft(data)));
 window = hamming(numel(data));
-hopSize = length(window)/50;
+Fs = 50;
+hopSize = length(window)/Fs;
 nfft = numel(dft);
-Fs = 50; 
+
 
 % - Chama-se a funcao para o calculo da STFT - %
 figure()
